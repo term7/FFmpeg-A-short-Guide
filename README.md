@@ -333,4 +333,54 @@ This script is designed to copy the folder structure of your Music Library and t
 
 IMPORTANT: THIS SCRIPT MAKES USE OF SED. SED IN MACOS IS DIFFERENT TO GNUSED AND SED IN LINUX. IF YOU WANT TO USE THIS SCRIPT ON ANOTHER SYSTEM THAN MACOS, PLEASE CHANGE ALL SED COMMANDS ACCORDINGLY. THIS SCRIPT HAS BEEN TESTED ON MACOS BIG SUR. WE SUCCESSFULLY CONVERTED A MUSIC LIBRARY CONSISTING OF 4617 M4A-FILES.
 
-Download the script [here](https://github.com/term7/FFmpeg-A-short-Guide/blob/33666a4054c1e1ae5ddb0c99b9168a3e201aa40a/Script/ffmpeg_batch_converter.sh). To convert your Music Library, simply execute this script - if you want to batch convert i.e. all videos in a folder, change the paramaters in the script accordingly!
+Copy the script below or download the script [here](https://github.com/term7/FFmpeg-A-short-Guide/blob/33666a4054c1e1ae5ddb0c99b9168a3e201aa40a/Script/ffmpeg_batch_converter.sh). To convert your Music Library, simply execute this script - if you want to batch convert i.e. all videos in a folder, change the paramaters in the script accordingly!
+
+```
+#!/bin/bash
+
+# Please note: This script makes use of 'sed'. In MacOS 'sed' is slightly different than 'gnused' or 'sed' in Linux.
+# IF YOU WANT TO USE THIS SCRIPT ON ANOTHER SYSTEM THAN MACOS, PLEASE CHANGE THE SYNTAX OF ALL SED COMMANDS ACCORDINGLY.
+
+# Declare source and destination folders:
+SOURCES=/Users/$(whoami)/Music/Music/Media/Music
+DESTINATION=/Users/$(whoami)/Desktop/MP3
+tmp=/Users/$(whoami)/.conversion.sh
+
+# Declare which file types you want to convert and your desired output:
+INPUT="m4a"
+OUTPUT="mp3"
+
+# Declare all other FFmpeg otions here (i.e. codec, bitrate settings, etc):
+FFMPEG_OPTIONS="-ab 128k -map_metadata 0 -id3v2_version 3 -acodec libmp3lame -vsync 2"
+
+# Create destination folder and copy directory tree:
+mkdir $DESTINATION
+cd $CONVERSION
+find . -type d | cpio -pdvm $DESTINATION
+
+# CONVERT ALL *.M4A INTO *.MP3:
+
+# Scan all folders in SOURCES for input files, and compile a list of their absolute paths:
+find $SOURCES -iname *.$INPUT | sed 's:[][{}()\| ;:=!@#$%^&*",<>'"'"']:\\&:g;' >> $tmp
+
+# Split list into input and output destinations:
+sed -i '' 'h;s/^//;p;x' $tmp
+sed -i '' "n;s|${SOURCES}|${DESTINATION}|g;" $tmp
+sed -i '' "n;s|${INPUT}|${OUTPUT}|g;" $tmp
+
+# Insert FFmpeg command:
+sed -i '' 's/^/ffmpeg -i /;n' $tmp
+sed -i '' "n;s|^|${FFMPEG_OPTIONS} |;" $tmp
+
+# Turn list into executable shell script:
+sed -i '' '$!N;s/\n/ /g' $tmp
+ex -sc '1i|#!/bin/sh' -cx $tmp
+chmod +x $tmp
+
+# FILE CONVERSION:
+$tmp
+
+# Cleanup:
+rm $tmp
+
+```
