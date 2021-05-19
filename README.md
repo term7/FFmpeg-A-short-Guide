@@ -20,20 +20,21 @@ We use them quite frequently. For the official documentation, please visit:
 - [05 - Bitrate presets to reduce file size for Vimeo or Youtube](#05---Bitrate-presets-to-reduce-file-size-for-Vimeo-or-Youtube)
 - [06 - Reduce file size by manipulating CRF](#06---Reduce-file-size-by-manipulating-CRF)
 - [07 - Trim Video](#07---Trim-Video)
-- [08 - Replace Audio](#08---Replace-Audio)
-- [09 - Mix Audio Channels](#09---Mix-Audio-Channels)
-- [10 - Surround Sound](#10---Surround-Sound)
-- [11 - Merge multiple videos, i.e. to create a seamless playlist](#11---Merge-multiple-videos,-i.e.-to-create-a-seamless-playlist)
-- [12 - Encode multiple files](#12---Encode-multiple-files)
-- [13 - Convert video frames into video stills](#13---Convert-video-frames-into-video-stills)
-- [14 - Convert images into a video](#14---Convert-images-into-a-video)
-- [15 - Create a slideshow from images](#15---Create-a-slideshow-from-images)
-- [16 - Animated GIF from images](#16---Animated-GIF-from-images)
+- [08 - Use Filters](#08---Use-Filters)
+- [09 - Replace Audio](#09---Replace-Audio)
+- [10 - Mix Audio Channels](#10---Mix-Audio-Channels)
+- [11 - Surround Sound](#11---Surround-Sound)
+- [12 - Merge multiple videos, i.e. to create a seamless playlist](#12---Merge-multiple-videos,-i.e.-to-create-a-seamless-playlist)
+- [13 - Encode multiple files](#13---Encode-multiple-files)
+- [14 - Convert video frames into video stills](#14---Convert-video-frames-into-video-stills)
+- [15 - Convert images into a video](#15---Convert-images-into-a-video)
+- [16 - Create a slideshow from images](#16---Create-a-slideshow-from-images)
+- [17 - Animated GIF from images](#17---Animated-GIF-from-images)
 
 ## SPECIFIC USE CASES
 
-- [17 - Package a DVD into MKV](#17---Package-a-DVD-into-MKV)
-- [18 - Convert your entire Apple Music Library from M4A to MP3](#18---Convert-your-entire-Apple-Music-Library-from-M4A-to-MP3)
+- [18 - Package a DVD into MKV](#19---Package-a-DVD-into-MKV)
+- [19 - Convert your entire Apple Music Library from M4A to MP3](#19---Convert-your-entire-Apple-Music-Library-from-M4A-to-MP3)
 
 ---
 
@@ -135,7 +136,26 @@ Suppose you want to remove the first 30 seconds from the beginning of a 5min vid
 
 
 
-# 08 - Replace Audio
+# 08 - Use Filters
+
+
+There are a lot of filters that you can use. In this guide we already used a few filters, i.e.: -vf scale=854:480 or -vf eq=saturation=0
+
+But filters can also be combined. In this example we change the scale of the video, its size, brightness and saturation:
+
+`ffmpeg -i input.mov -vf scale=854:480,eq=brightness=-0.1:saturation=1.5 output.mp4 `
+
+Other possible options are: gamma and contrast (just to name some examples).
+Here a link to the official documantation: [https://ffmpeg.org/ffmpeg-filters.html](https://ffmpeg.org/ffmpeg-filters.html) 
+
+The following filter setting can be used to create a smooth fade-in and fade-out effect. The fade-in effect happens at the beginning of the video and is 2 seconds long (fade=in:0:d2). In this example we know that our video is 5min (300sec) long and that our video has 25 frames per second. This means our video has 25 x 300 = 7500 frames. We want to add a slightly slower fade-out effect, which is supposed to be 3 seconds long at the very end of our video. Thus we have to set our filter to finish at frame 7500 (fade=out:7500:d=3):
+
+`ffmpeg -i input.mov -vf fade=in:0:d=2,fade=out:7500:d=3 output.mp4 `
+
+
+
+
+# 09 - Replace Audio
 
 Suppose you have two different video files. You want to use the video stream of file_1.mp4 and combine it with the audio of file_2.mp4:
 
@@ -143,7 +163,7 @@ Suppose you have two different video files. You want to use the video stream of 
 
 
 
-# 09 - Mix Audio Channels
+# 10 - Mix Audio Channels
 
 Left channel to mono:<br>
 `ffmpeg -i input.mp4 -map_channel 0.1.0 -c:v copy mono.mp4`
@@ -159,7 +179,7 @@ Right channel to stereo:<br>
 
 
 
-# 10 - Surround Sound
+# 11 - Surround Sound
 
 Encode 5.1 surround sound from 6 separate mono files:
 
@@ -175,7 +195,7 @@ Encode video as high quality MKV with LinearPCM 5.1 Surround Audio:
 
 
 
-# 11 - Merge multiple videos, i.e. to create a seamless playlist
+# 12 - Merge multiple videos, i.e. to create a seamless playlist
 
 Open a text editor and insert the path to each video file you want to merge (merge.txt).
 Use a new line for each entry:
@@ -192,7 +212,7 @@ Then use FFmpeg to merge the files:
 
 
 
-# 12 - Encode multiple files
+# 13 - Encode multiple files
 
 Convert i.e. multiple WAV-files into MP3-files (this command only works in the current directory):
 
@@ -204,7 +224,7 @@ To convert all files in a directory and in all subdirecories you can use a combi
 
 
 
-# 13 - Convert video frames into video stills
+# 14 - Convert video frames into video stills
 
 Convert each frame in low quality:<br>
 `ffmpeg -i input.mp4 frame%05d.jpg`
@@ -217,7 +237,7 @@ Extract a single frame at ~60 seconds duration (-ss 60):<br>
 
 
 
-# 14 - Convert images into a video
+# 15 - Convert images into a video
 
 Convert a single image into H264.mp4 with a duration of 30 seconds (-t 30):
 
@@ -229,7 +249,7 @@ Convert all images in a folder into one H264.mp4, each image represents one fram
 
 
 
-# 15 - Create a slideshow from images
+# 16 - Create a slideshow from images
 
 All images in the source folder have the same size and aspect ratio. The video will have a framerate of 25 frames per second (-framerate 25) and each image will be shown for 5 seconds (-r 1/5):
 
@@ -249,7 +269,7 @@ Images in the source folders have different sizes and aspect ratios and will be 
 
 
 
-# 16 - Animated GIF from images
+# 17 - Animated GIF from images
 
 All images in the source folder have the same size and aspect ratio. In this example the images are saved as PNG and each image will be shown for 0.5 seconds (-r 1/0.5):
 
@@ -261,7 +281,7 @@ All images in the source folder have the same size and aspect ratio. In this exa
 
 
 
-# 17 - Package a DVD into MKV
+# 18 - Package a DVD into MKV
 
 Copy your DVD to your hard disk and browse to the VIDEO_TS folder:<br>
 `cd VIDEO_TS`
@@ -306,7 +326,7 @@ This command will package our DVD into a .mkv file:
 `  output.mkv`
 
 
-# 18 - Convert your entire Apple Music Library from M4A to MP3
+# 19 - Convert your entire Apple Music Library from M4A to MP3
 
 When you download Music from the iTunes Store, Apple Music automatically downloads M4A files. Thus we assume you have your entire Apple Music Library stored as M4A. However, many media players still do not support M4A. If you want to listen to your music, i.e. on your Android Device (and your Android Music Player does not support M4A), it can be quite a hassle to convert your Music Library into MP3 and then transfer only the MP3 files to your device.
 This script is designed to copy the folder structure of your Music Library and then convert all M4A-files into MP3-files, all stored in a newly created Music Directory on your Desktop or any other location that you specify in this script. You can always change it according to your batch conversion needs.
