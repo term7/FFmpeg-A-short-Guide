@@ -286,7 +286,7 @@ All images in the source folder have the same size and aspect ratio. In this exa
 Copy your DVD to your hard disk and browse to the VIDEO_TS folder:<br>
 `cd VIDEO_TS`
 
-Unify all *.VOB files:<br>
+Merge all *.VOB files into one file:<br>
 `cat *.VOB > output.vob`
 
 Inspect output.vob:<br>
@@ -313,17 +313,19 @@ The DVD navigation menu is useless for us. Thus we discard Stream 0.
 
 This command will package our DVD into a .mkv file:
 
-`ffmpeg \`<br>
-`  -analyzeduration 100M -probesize 100M \`<br>
-`  -i output.vob \`<br>
-`  -map 0:1 -map 0:2 -map 0:3 -map 0:4 \`<br>
-`  -metadata:s:s:0 language=eng -metadata:s:s:0 title="English" \`<br>
-`  -metadata:s:s:1 language=fre -metadata:s:s:1 title="French" \`<br>
-`  -metadata:s:a:0 language=eng -metadata:s:a:0 title="English stereo" \`<br>
-`  -codec:v libx264 -crf 21 \`<br>
-`  -codec:a libmp3lame -qscale:a 2 \`<br>
-`  -codec:s copy \`<br>
-`  output.mkv`
+```
+ffmpeg \
+  -analyzeduration 100M -probesize 100M \
+  -i output.vob \
+  -map 0:1 -map 0:2 -map 0:3 -map 0:4 \
+  -metadata:s:s:0 language=eng -metadata:s:s:0 title="English" \
+  -metadata:s:s:1 language=fre -metadata:s:s:1 title="French" \
+  -metadata:s:a:0 language=eng -metadata:s:a:0 title="English stereo" \
+  -codec:v libx264 -crf 21 \
+  -codec:a libmp3lame -qscale:a 2 \
+  -codec:s copy \
+  output.mkv
+```
 
 
 # 19 - Convert your entire Apple Music Library from M4A to MP3
