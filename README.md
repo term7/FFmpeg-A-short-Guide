@@ -33,7 +33,7 @@ We use them quite frequently. For the official documentation, please visit:
 
 ## SPECIFIC USE CASES
 
-- [18 - Package a DVD into MKV](#19---Package-a-DVD-into-MKV)
+- [18 - Package a DVD into MKV](#18---Package-a-DVD-into-MKV)
 - [19 - Convert your entire Apple Music Library from M4A to MP3](#19---Convert-your-entire-Apple-Music-Library-from-M4A-to-MP3)
 
 ---
