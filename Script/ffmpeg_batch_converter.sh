@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Please note: This script makes use of 'sed'. In MacOS 'sed' is slightly different than 'gnused' or 'sed' in Linux.
-# IF YOU WANT TO USE THIS SCRIPT ON ANOTHER SYSTEM THAN MACOS, PLEASE CHANGE THE SYNTAX OF ALL SED COMMANDS ACCORDINGLY.
+# IF YOU WANT TO USE THIS SCRIPT ON ANOTHER SYSTEM THAN MACOS, PLEASE CHANGE ALL SED COMMANDS ACCORDINGLY.
 
 # Short guide to FFmpeg: https://gist.github.com/term7/b0f14e90fb4c777522bdf4e09df63a01
 
@@ -22,12 +22,13 @@ tmp=/Users/$(whoami)/.conversion.sh
 INPUT="m4a"
 OUTPUT="mp3"
 
-# Declare all other FFmpeg otions here (i.e. codec, bitrate settings, etc):
+# Declare all FFmpeg otions here (i.e. codec, bitrate settings, etc):
 FFMPEG_OPTIONS="-ab 128k -map_metadata 0 -id3v2_version 3 -acodec libmp3lame -vsync 2"
 
 # Create destination folder and copy directory tree:
+
 mkdir $DESTINATION
-cd $CONVERSION
+cd $SOURCES
 find . -type d | cpio -pdvm $DESTINATION
 
 # CONVERT ALL *.M4A INTO *.MP3:
@@ -49,8 +50,8 @@ sed -i '' '$!N;s/\n/ /g' $tmp
 ex -sc '1i|#!/bin/sh' -cx $tmp
 chmod +x $tmp
 
-# FILE CONVERSION:
+# Convert all found files:
 $tmp
 
-# Cleanup:
+# Cleanup
 rm $tmp
