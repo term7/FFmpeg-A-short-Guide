@@ -14,9 +14,9 @@
 
 
 # Declare source and destination folders:
-SOURCES=/Users/$(whoami)/Music/Music/Media/Music
-DESTINATION=/Users/$(whoami)/Desktop/MP3
-tmp=/Users/$(whoami)/.conversion.sh
+SOURCES=/Users/$(stat -f '%Su' /dev/console)/Music/Music/Media/Music
+DESTINATION=/Users/$(stat -f '%Su' /dev/console)/Desktop/MP3
+tmp=/Users/$(stat -f '%Su' /dev/console)/.conversion.sh
 
 # Declare which file types you want to convert and your desired output:
 INPUT="m4a"
@@ -25,8 +25,13 @@ OUTPUT="mp3"
 # Declare all FFmpeg otions here (i.e. codec, bitrate settings, etc):
 FFMPEG_OPTIONS="-ab 128k -map_metadata 0 -id3v2_version 3 -acodec libmp3lame -vsync 2"
 
-# Create destination folder and copy directory tree:
+# Cleanup: in case something wen't wrong before...
+if [ -d "$tmp" ]; then
+    rm $tmp
+    touch $tmp
+fi
 
+# Create destination folder and copy directory tree:
 mkdir $DESTINATION
 cd $SOURCES
 find . -type d | cpio -pdvm $DESTINATION
