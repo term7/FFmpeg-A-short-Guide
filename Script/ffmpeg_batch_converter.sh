@@ -14,7 +14,7 @@
 
 
 # Declare source and destination folders:
-SOURCES=/Users/$(stat -f '%Su' /dev/console)/Music/Music/Media/Music
+SOURCES=/Users/$(stat -f '%Su' /dev/console)/Music/Music
 DESTINATION=/Users/$(stat -f '%Su' /dev/console)/Desktop/MP3
 tmp=/Users/$(stat -f '%Su' /dev/console)/.conversion.sh
 
