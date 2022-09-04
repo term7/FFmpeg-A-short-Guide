@@ -3,7 +3,7 @@
 # Please note: This script makes use of 'sed'. In MacOS 'sed' is slightly different than 'gnused' or 'sed' in Linux.
 # IF YOU WANT TO USE THIS SCRIPT ON ANOTHER SYSTEM THAN MACOS, PLEASE CHANGE ALL SED COMMANDS ACCORDINGLY.
 
-# Short guide to FFmpeg: https://gist.github.com/term7/b0f14e90fb4c777522bdf4e09df63a01
+# https://gist.github.com/term7/ff7729bd56f9d1c9718caf467c734986
 
 # MIT License
 # Copyright (c) 2021
