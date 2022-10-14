@@ -25,7 +25,7 @@ We use them quite frequently. For the official documentation, please visit:
 - [10 - Mix Audio Channels](#10---Mix-Audio-Channels)
 - [11 - Surround Sound](#11---Surround-Sound)
 - [12 - Merge multiple videos for example to create a seamless playlist](#12---Merge-multiple-videos-for-example-to-create-a-seamless-playlist)
-- [13 - Batch Conversion - Encode multiple files](#13---Batch-Conversion---Encode-multiple-files)
+- [13 - Batch Conversion: encode multiple files](#13---Batch-Conversion:-encode-multiple-files)
 - [14 - Convert video frames into video stills](#14---Convert-video-frames-into-video-stills)
 - [15 - Convert images into a video](#15---Convert-images-into-a-video)
 - [16 - Create a slideshow from images](#16---Create-a-slideshow-from-images)
@@ -212,7 +212,7 @@ Then use FFmpeg to merge the files:
 
 
 
-# 13 - Batch Conversion - Encode multiple files
+# 13 - Batch Conversion: encode multiple files
 
 Convert i.e. multiple WAV-files into MP3-files (this command only works in the current directory):
 
