@@ -24,7 +24,7 @@ We use them quite frequently. For the official documentation, please visit:
 - [09 - Replace Audio](#09---Replace-Audio)
 - [10 - Mix Audio Channels](#10---Mix-Audio-Channels)
 - [11 - Surround Sound](#11---Surround-Sound)
-- [12 - Merge multiple videos, i.e. to create a seamless playlist](#12---Merge-multiple-videos,-i.e.-to-create-a-seamless-playlist)
+- [12 - Merge multiple videos for example to create a seamless playlist](#12---Merge-multiple-videos-for-example-to-create-a-seamless-playlist)
 - [13 - Encode multiple files](#13---Encode-multiple-files)
 - [14 - Convert video frames into video stills](#14---Convert-video-frames-into-video-stills)
 - [15 - Convert images into a video](#15---Convert-images-into-a-video)
@@ -195,7 +195,7 @@ Encode video as high quality MKV with LinearPCM 5.1 Surround Audio:
 
 
 
-# 12 - Merge multiple videos, i.e. to create a seamless playlist
+# 12 - Merge multiple videos for example to create a seamless playlist
 
 Open a text editor and insert the path to each video file you want to merge (merge.txt).
 Use a new line for each entry:
