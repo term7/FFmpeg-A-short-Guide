@@ -183,7 +183,7 @@ Right channel to stereo:<br>
 
 Encode 5.1 surround sound from 6 separate mono files:
 
-`ffmpeg -i front_left.wav -i front_right.wav -i front_center.wav -i lfe.wav -i surround_left.wav -i surround_right.wav -filter_complex "[0:a][1:a][2:a][3:a][4:a][5:a]join=inputs=6:channel_layout=5.1:map=0.0-FL|1.0-FR|2.0-FC|3.0-LFE|4.0-BL|5.0-BR[a]" -map "[a]" surround.wav`
+`ffmpeg -i front_left.wav -i front_right.wav -i front_center.wav -i front_left.wav -i surround_left.wav -i surround_right.wav -filter_complex "[0:a][1:a][2:a][3:a][4:a][5:a]join=inputs=6:channel_layout=5.1:map=0.0-FL|1.0-FR|2.0-FC|3.0-LFE|4.0-BL|5.0-BR[a]" -map "[a]" surround.wav`
 
 Encode video as high quality MKV with Dolby Digital 5.1 Surround Audio:
 
