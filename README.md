@@ -393,5 +393,5 @@ rm $tmp
 This repository is actively maintained on Codeberg:<br>
 https://codeberg.org/term7/FFmpeg-A-short-Guide
 
-Changes are puhsed regularly to our Githoub Mirror:<br>
+Changes are puhsed regularly to our Github Mirror:<br>
 https://github.com/term7/FFmpeg-A-short-Guide
