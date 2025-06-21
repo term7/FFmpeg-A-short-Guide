@@ -387,3 +387,11 @@ $tmp
 rm $tmp
 
 ```
+
+### **MIRRORS**
+
+This repository is actively maintained on Codeberg:<br>
+https://codeberg.org/term7/FFmpeg-A-short-Guide
+
+Changes are puhsed regularly to our Githoub Mirror:<br>
+https://github.com/term7/FFmpeg-A-short-Guide
